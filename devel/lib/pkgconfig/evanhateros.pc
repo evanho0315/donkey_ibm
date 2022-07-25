@@ -1,0 +1,8 @@
+prefix=/home/jetson/catkin_ws/devel
+
+Name: evanhateros
+Description: Description of evanhateros
+Version: 0.0.0
+Cflags: -I/home/jetson/catkin_ws/devel/include -I/home/jetson/catkin_ws/src/evanhateros/include
+Libs: -L${prefix}/lib -levanhateros
+Requires: rospy std_msgs message_runtime
