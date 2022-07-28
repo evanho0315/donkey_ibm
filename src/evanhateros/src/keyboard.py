@@ -36,9 +36,9 @@ For Holonomic mode (strafing), hold down the shift key:
 t : up (+z)
 b : down (-z)
 anything else : stop
-q/z : increase/decrease max speeds by 10%
-w/x : increase/decrease only linear speed by 10%
-e/c : increase/decrease only angular speed by 10%
+q/z : increase/decrease max velocitys by 10%
+w/x : increase/decrease only linear velocity by 10%
+e/c : increase/decrease only angular velocity by 10%
 CTRL-C to quit
 """
 
@@ -48,7 +48,7 @@ class PublishThread(threading.Thread):
     def __init__(self, rate):
         super(PublishThread, self).__init__()
         self.publisher = rospy.Publisher('control_msg', controlMsg, queue_size = 10)
-        self.speed = 0.0
+        self.velocity = 0.0
         self.rotation = 0.0
         self.condition = threading.Condition()
         self.shutdown=False
@@ -74,9 +74,9 @@ class PublishThread(threading.Thread):
         if rospy.is_shutdown():
             raise Exception("Got shutdown request before subscribers connected")
 
-    def update(self, speed, rotation,shutdown):
+    def update(self, velocity, rotation,shutdown):
         self.condition.acquire()
-        self.speed = speed
+        self.velocity = velocity
         self.rotation = rotation
         self.shutdown=shutdown
         # Notify publish thread that we have a new message.
@@ -97,7 +97,7 @@ class PublishThread(threading.Thread):
             self.condition.wait(self.timeout)
 
             # Copy state into twist message.
-            control_msg.speed = self.speed
+            control_msg.velocity = self.velocity
             control_msg.rotation = self.rotation
             control_msg.shutdown= self.shutdown
 
@@ -134,15 +134,15 @@ def restoreTerminalSettings(old_settings):
         return
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
 
-def vels(speed, rotation):
-    return "currently:\tspeed %s\trotation %s " % (speed,rotation)
+def vels(velocity, rotation):
+    return "currently:\tvelocity %s\trotation %s " % (velocity,rotation)
 
 if __name__=="__main__":
     settings = saveTerminalSettings()
 
     rospy.init_node('teleop_twist_keyboard')
 
-    speed = 0
+    velocity = 0
     rotation = 0
     shutdown=False
     repeat = 10 #=rate
@@ -151,23 +151,23 @@ if __name__=="__main__":
 
     try:
         pub_thread.wait_for_subscribers()
-        pub_thread.update(speed, rotation)
+        pub_thread.update(velocity, rotation)
 
         print(msg)
-        print(vels(speed,turn))
+        print(vels(velocity,turn))
         while(1):
             key = getKey(settings, 0.5)
             if(key.char=='w'):
-                speed=min(speed+0.05,1);
+                velocity=min(velocity+0.05,1);
             elif(key.char=='s'):
-                speed = max(speed-0.05, -1);
+                velocity = max(velocity-0.05, -1);
             elif (key.char == 'd'):
                 rotation=max(rotation-0.05,-1);
             elif (key.char == 'a'):
                 rotation = min(rotation+0.05, 1);
             elif(key.chr=='q'):
                 shutdown=True
-            pub_thread.update(speed, rotation,shutdown)
+            pub_thread.update(velocity, rotation,shutdown)
 
     except Exception as e:
         print(e)
