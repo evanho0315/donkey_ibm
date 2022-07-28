@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python3.6
 import rospy
 from evanhateros.msg import car_control
 import time
