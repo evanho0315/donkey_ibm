@@ -85,7 +85,7 @@ class PublishThread(threading.Thread):
 
     def stop(self):
         self.done = True
-        self.update(0, 0)
+        self.update(0, 0,True)
         self.join()
 
     def run(self):
@@ -134,8 +134,8 @@ def restoreTerminalSettings(old_settings):
         return
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
 
-def vels(velocity, rotation):
-    return "currently:\tvelocity %s\trotation %s " % (velocity,rotation)
+def vels(velocity, rotation,shutdown):
+    return "currently:\tvelocity %s\trotation %s %s" % (velocity,rotation,shutdown)
 
 if __name__=="__main__":
     settings = saveTerminalSettings()
@@ -151,22 +151,23 @@ if __name__=="__main__":
 
     try:
         pub_thread.wait_for_subscribers()
-        pub_thread.update(velocity, rotation)
+        pub_thread.update(velocity, rotation,shutdown)
 
         print(msg)
-        print(vels(velocity,rotation))
+        print(vels(velocity,rotation,shutdown))
         while(1):
             key = getKey(settings, 0.5)
-            if(key.char=='w'):
+            if(key=='w'):
                 velocity=min(velocity+0.05,1);
-            elif(key.char=='s'):
+            elif(key=='s'):
                 velocity = max(velocity-0.05, -1);
-            elif (key.char == 'd'):
+            elif (key == 'd'):
                 rotation=max(rotation-0.05,-1);
-            elif (key.char == 'a'):
+            elif (key == 'a'):
                 rotation = min(rotation+0.05, 1);
-            elif(key.chr=='q'):
+            elif(key=='q'):
                 shutdown=True
+            print(vels(velocity,rotation,shutdown))
             pub_thread.update(velocity, rotation,shutdown)
 
     except Exception as e:
