@@ -154,7 +154,7 @@ if __name__=="__main__":
         pub_thread.update(velocity, rotation)
 
         print(msg)
-        print(vels(velocity,turn))
+        print(vels(velocity,rotation))
         while(1):
             key = getKey(settings, 0.5)
             if(key.char=='w'):
