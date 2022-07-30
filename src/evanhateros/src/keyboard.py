@@ -153,16 +153,16 @@ if __name__=="__main__":
 
         print(msg)
         print(vels(velocity,rotation,shutdown))
-        while(1):
+        while(shutdown==False):
             key = getKey(settings, 0.5)
             if(key=='w'):
-                velocity=min(velocity+0.05,1);
+                velocity=round(min(velocity+0.05,1),2);
             elif(key=='s'):
-                velocity = max(velocity-0.05, -1);
+                velocity = round(max(velocity-0.05, -1),2);
             elif (key == 'd'):
-                rotation=max(rotation-0.05,-1);
+                rotation=round(max(rotation-0.05,-1),2);
             elif (key == 'a'):
-                rotation = min(rotation+0.05, 1);
+                rotation = round(min(rotation+0.05, 1),2);
             elif(key=='q'):
                 shutdown=True
             print(vels(velocity,rotation,shutdown))
