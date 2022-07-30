@@ -52,7 +52,6 @@ class PublishThread(threading.Thread):
         self.rotation = 0.0
         self.condition = threading.Condition()
         self.shutdown=False
-        self.done = False
 
         # Set timeout to None if rate is 0 (causes new_message to wait forever
         # for new data to publish)
@@ -78,20 +77,19 @@ class PublishThread(threading.Thread):
         self.condition.acquire()
         self.velocity = velocity
         self.rotation = rotation
-        self.shutdown=shutdown
+        self.shutdown = shutdown
         # Notify publish thread that we have a new message.
         self.condition.notify()
         self.condition.release()
 
     def stop(self):
-        self.done = True
         self.update(0, 0,True)
         self.join()
 
     def run(self):
         control_msg = controlMsg()
 
-        while not self.done:
+        while not self.shutdown:
             self.condition.acquire()
             # Wait for a new message or timeout.
             self.condition.wait(self.timeout)
