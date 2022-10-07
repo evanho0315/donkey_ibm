@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/evanhateros_generate_messages_nodejs"
-  "/home/jetson/catkin_ws/devel/share/gennodejs/ros/evanhateros/msg/car_control.js"
+  "/home/jetson/Desktop/donkey_ibm/devel/share/gennodejs/ros/evanhateros/msg/car_control.js"
 )
 
 # Per-language clean rules from dependency scanning.

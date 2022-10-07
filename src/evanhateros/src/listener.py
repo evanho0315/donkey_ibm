@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3.7
 import rospy
 from evanhateros.msg import car_control
 import time
@@ -17,7 +17,6 @@ class PCA9685:
 
         self.default_freq = 60
         self.pwm_scale = frequency / self.default_freq
-
         import Adafruit_PCA9685
         # Initialise the PCA9685 using the default address (0x40).
         if busnum is not None:

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/evanhateros_generate_messages_cpp"
-  "/home/jetson/catkin_ws/devel/include/evanhateros/car_control.h"
+  "/home/jetson/Desktop/donkey_ibm/devel/include/evanhateros/car_control.h"
 )
 
 # Per-language clean rules from dependency scanning.

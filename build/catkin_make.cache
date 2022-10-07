@@ -1,2 +1,2 @@
-evanhateros
--DCATKIN_DEVEL_PREFIX=/home/jetson/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/jetson/catkin_ws/install -G Unix Makefiles
+evanhateros:rplidar_ros
+-DCATKIN_DEVEL_PREFIX=/home/jetson/Desktop/donkey_ibm/devel -DCMAKE_INSTALL_PREFIX=/home/jetson/Desktop/donkey_ibm/install -G Unix Makefiles

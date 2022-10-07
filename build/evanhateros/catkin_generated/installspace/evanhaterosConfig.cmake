@@ -67,14 +67,14 @@ set(evanhateros_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(evanhateros_SOURCE_PREFIX /home/jetson/catkin_ws/src/evanhateros)
-  set(evanhateros_DEVEL_PREFIX /home/jetson/catkin_ws/devel)
+  set(evanhateros_SOURCE_PREFIX /home/jetson/Desktop/donkey_ibm/src/evanhateros)
+  set(evanhateros_DEVEL_PREFIX /home/jetson/Desktop/donkey_ibm/devel)
   set(evanhateros_INSTALL_PREFIX "")
   set(evanhateros_PREFIX ${evanhateros_DEVEL_PREFIX})
 else()
   set(evanhateros_SOURCE_PREFIX "")
   set(evanhateros_DEVEL_PREFIX "")
-  set(evanhateros_INSTALL_PREFIX /home/jetson/catkin_ws/install)
+  set(evanhateros_INSTALL_PREFIX /home/jetson/Desktop/donkey_ibm/install)
   set(evanhateros_PREFIX ${evanhateros_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/jetson/catkin_ws/install/lib;/opt/ros/melodic/lib)
+    foreach(path /home/jetson/Desktop/donkey_ibm/install/lib;/home/jetson/Desktop/donkey_ibm/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

@@ -1,4 +1,4 @@
-prefix=/home/jetson/catkin_ws/install
+prefix=/home/jetson/Desktop/donkey_ibm/install
 
 Name: evanhateros
 Description: Description of evanhateros
