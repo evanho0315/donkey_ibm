@@ -1,0 +1,4 @@
+<launch>
+ <include pkg="cartographer_ros" file="$(find cartographer_ros)/launch/demo_revo_lds.launch" />
+ <include pkg="rplidar_ros" file="$(find rplidar_ros)/launch/rplidar.launch" />
+</launch>

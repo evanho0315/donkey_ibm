@@ -1,0 +1,2 @@
+cartographer:cartographer_ros/cartographer_ros:cartographer_ros/cartographer_ros_msgs:cartographer_ros/cartographer_rviz:evanhateros:rplidar_ros
+-G Ninja -DCATKIN_DEVEL_PREFIX=/home/jetson/Desktop/1020_j/devel_isolated -DCMAKE_INSTALL_PREFIX=/home/jetson/Desktop/1020_j/install_isolated
